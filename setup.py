@@ -8,7 +8,7 @@ tests_require = []
 setup(name='dolmen.emailer',
       version=version,
       description="",
-      long_description=open(os.path.join("docs", "README.txt").read() + "\n" +
+      long_description=open(os.path.join("docs", "README.txt")).read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
         "Programming Language :: Python",
@@ -26,8 +26,11 @@ setup(name='dolmen.emailer',
       packages=find_packages('src'),
       extras_require = {'test': tests_require},
       install_requires=[
+          'grokcore.component',
           'setuptools',
-          # -*- Extra requirements: -*-
+          'zope.component',
+          'zope.interface',
+          'zope.sendmail',
       ],
       entry_points="""
       # -*- Entry points: -*-
