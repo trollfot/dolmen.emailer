@@ -29,6 +29,7 @@ setup(name='dolmen.emailer',
           'setuptools',
           'zope.component',
           'zope.interface',
+          'zope.security',
           'zope.sendmail',
       ],
       entry_points="""
