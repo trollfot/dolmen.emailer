@@ -4,7 +4,7 @@ import grokcore.component as grok
 import email.MIMEText, email.Header
 
 from zope.interface import Interface
-from zope.component import getUtility
+from zope.component import queryUtility
 from zope.sendmail.interfaces import IMailDelivery
 
 
@@ -38,4 +38,4 @@ class MailSender(grok.GlobalUtility):
 
 
 def get_sender(name=u''):
-    return getUtility(IMailSender, name=name)
+    return queryUtility(IMailSender, name=name)
