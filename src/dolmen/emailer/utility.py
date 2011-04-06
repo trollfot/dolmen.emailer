@@ -4,7 +4,7 @@ import grokcore.component as grok
 import email.MIMEText, email.Header
 
 from zope.interface import Interface
-from zope.component import queryUtility
+from zope.component import queryUtility, getUtility
 from zope.sendmail.interfaces import IMailDelivery
 
 
