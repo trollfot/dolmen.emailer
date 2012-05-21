@@ -3,17 +3,10 @@
 import grokcore.component as grok
 import email.MIMEText, email.Header
 
-from zope.interface import Interface
 from zope.component import queryUtility, getUtility
 from zope.sendmail.interfaces import IMailDelivery
 
-
-class IMailSender(Interface):
-    """A mail sender definition.
-    """
-    def send(recipients, subject, body, sender=None):
-        """Send a mail to the given recipients.
-        """
+from .interfaces import IMailSender
 
 
 class MailSender(grok.GlobalUtility):
@@ -23,10 +16,14 @@ class MailSender(grok.GlobalUtility):
     mailer_name = u"dolmen.mailer"
     admin_email = u"service@mysite.com"
 
-    def send(self, recipients, subject, body, sender=None):
+    def send(self, recipients, subject, body, sender=None, **kwargs):
+
+        if kwargs:
+            raise ValueError('unsupported arguments %r' % kwargs)
+
         if sender is None:
             sender = self.admin_email
-        
+
         mailer = getUtility(IMailDelivery, self.mailer_name)
         msg = email.MIMEText.MIMEText(body.encode('UTF-8'), 'plain', 'UTF-8')
         msg["Subject"] = email.Header.Header(subject, 'UTF-8')
